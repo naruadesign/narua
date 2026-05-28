@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content'
+import BaseLayout from '../../components/layout/BaseLayout.astro'
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+---
+
+<BaseLayout title="Blog" description="Thoughts, updates, and news from the Narua team.">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <h1 class="text-4xl font-bold tracking-tight text-gray-900 mb-12">Blog</h1>
+
+    {posts.length === 0 && (
+      <p class="text-gray-500">No posts yet. Check back soon.</p>
+    )}
+
+    <div class="divide-y divide-gray-100">
+      {posts.map(post => (
+        <article class="py-8">
+          <time class="text-sm text-gray-400">
+            {new Date(post.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </time>
+          <h2 class="mt-2 text-xl font-semibold text-gray-900">
+            <a href={`/blog/${post.id}`} class="hover:text-brand-600 transition-colors">
+              {post.data.title}
+            </a>
+          </h2>
+          <p class="mt-2 text-gray-600">{post.data.description}</p>
+          <a href={`/blog/${post.id}`} class="mt-3 inline-flex items-center text-sm font-medium text-brand-600 hover:text-brand-700 transition-colors">
+            Read more →
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

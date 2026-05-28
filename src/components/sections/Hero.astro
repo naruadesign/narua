@@ -1,0 +1,41 @@
+---
+interface Props {
+  headline: string
+  subheadline: string
+  ctaPrimary: string
+  ctaPrimaryHref: string
+  ctaSecondary?: string
+  ctaSecondaryHref?: string
+}
+
+const { headline, subheadline, ctaPrimary, ctaPrimaryHref, ctaSecondary, ctaSecondaryHref } = Astro.props
+---
+
+<section class="relative py-24 sm:py-32 overflow-hidden">
+  <div class="absolute inset-0 -z-10 bg-gradient-to-br from-brand-50 via-white to-white"></div>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 max-w-3xl mx-auto">
+      {headline}
+    </h1>
+    <p class="mt-6 text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
+      {subheadline}
+    </p>
+    <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a
+        href={ctaPrimaryHref}
+        class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-brand-600 rounded-xl hover:bg-brand-700 transition-colors shadow-sm"
+      >
+        {ctaPrimary}
+      </a>
+      {ctaSecondary && ctaSecondaryHref && (
+        <a
+          href={ctaSecondaryHref}
+          class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 text-base font-medium text-gray-700 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors"
+        >
+          {ctaSecondary}
+        </a>
+      )}
+    </div>
+  </div>
+</section>

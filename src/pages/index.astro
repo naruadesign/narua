@@ -1,0 +1,35 @@
+---
+import { getEntry, render } from 'astro:content'
+import BaseLayout from '../components/layout/BaseLayout.astro'
+import Hero from '../components/sections/Hero.astro'
+import Features from '../components/sections/Features.astro'
+
+const entry = await getEntry('pages', 'home')
+if (!entry) throw new Error('Missing content: src/content/pages/home.mdx')
+
+const { Content } = await render(entry)
+const { hero, features } = entry.data
+---
+
+<BaseLayout title="Home" description={entry.data.description}>
+  {hero && (
+    <Hero
+      headline={hero.headline}
+      subheadline={hero.subheadline}
+      ctaPrimary={hero.ctaPrimary}
+      ctaPrimaryHref={hero.ctaPrimaryHref}
+      ctaSecondary={hero.ctaSecondary}
+      ctaSecondaryHref={hero.ctaSecondaryHref}
+    />
+  )}
+
+  {features && <Features features={features} />}
+
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-gray prose-lg max-w-none">
+        <Content />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

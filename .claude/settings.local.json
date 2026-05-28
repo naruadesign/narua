@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(npx --version)",
+      "Bash(vercel --version)",
+      "Bash(gh --version)",
+      "Bash(git --version)",
+      "Read(//Users/hawckins/.claude/**)",
+      "Read(//Users/hawckins/.claude/plans/**)"
+    ]
+  }
+}
