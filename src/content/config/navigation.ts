@@ -1,9 +1,9 @@
 export const navLinks = [
-  { label: 'Home',    href: '/' },
-  { label: 'About',   href: '/about' },
-  { label: 'Pricing', href: '/pricing' },
-  { label: 'Blog',    href: '/blog' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Who We Are', href: '/#features' },
+  { label: 'How it Works',    href: '/#about' },
+  { label: 'Pricing',  href: '/#pricing' },
+  { label: 'Blog',     href: '/blog' },
+  { label: 'Talk to Us',  href: '/#contact' },
 ]
 
 export const footerLinks = [

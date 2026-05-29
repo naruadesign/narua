@@ -11,27 +11,122 @@ interface Props {
 const { headline, subheadline, ctaPrimary, ctaPrimaryHref, ctaSecondary, ctaSecondaryHref } = Astro.props
 ---
 
-<section class="relative py-24 sm:py-32 overflow-hidden">
-  <div class="absolute inset-0 -z-10 bg-gradient-to-br from-brand-50 via-white to-white"></div>
+<style>
+  .hero-pride-bg {
+    /* 12 original stripes repeated 4× = 48 layers */
+    background-image:
+      /* cycle 1 */
+      linear-gradient(to bottom, #807E7C, #938F85),
+      linear-gradient(to bottom, #746E6C, #857D75),
+      linear-gradient(to bottom, #6A6462, #7A706A),
+      linear-gradient(to bottom, #666262, #746A68),
+      linear-gradient(to bottom, #606060, #6E6462),
+      linear-gradient(to bottom, #5C5858, #6A6260),
+      linear-gradient(to bottom, #585252, #72605A),
+      linear-gradient(to bottom, #5C5050, #8C6C66),
+      linear-gradient(to bottom, #6A5856, #A47E78),
+      linear-gradient(to bottom, #7E6462, #BC9288),
+      linear-gradient(to bottom, #9A7872, #D0AC9E),
+      linear-gradient(to bottom, #BA9688, #E8C8B0),
+      /* cycle 2 */
+      linear-gradient(to bottom, #807E7C, #938F85),
+      linear-gradient(to bottom, #746E6C, #857D75),
+      linear-gradient(to bottom, #6A6462, #7A706A),
+      linear-gradient(to bottom, #666262, #746A68),
+      linear-gradient(to bottom, #606060, #6E6462),
+      linear-gradient(to bottom, #5C5858, #6A6260),
+      linear-gradient(to bottom, #585252, #72605A),
+      linear-gradient(to bottom, #5C5050, #8C6C66),
+      linear-gradient(to bottom, #6A5856, #A47E78),
+      linear-gradient(to bottom, #7E6462, #BC9288),
+      linear-gradient(to bottom, #9A7872, #D0AC9E),
+      linear-gradient(to bottom, #BA9688, #E8C8B0),
+      /* cycle 3 */
+      linear-gradient(to bottom, #807E7C, #938F85),
+      linear-gradient(to bottom, #746E6C, #857D75),
+      linear-gradient(to bottom, #6A6462, #7A706A),
+      linear-gradient(to bottom, #666262, #746A68),
+      linear-gradient(to bottom, #606060, #6E6462),
+      linear-gradient(to bottom, #5C5858, #6A6260),
+      linear-gradient(to bottom, #585252, #72605A),
+      linear-gradient(to bottom, #5C5050, #8C6C66),
+      linear-gradient(to bottom, #6A5856, #A47E78),
+      linear-gradient(to bottom, #7E6462, #BC9288),
+      linear-gradient(to bottom, #9A7872, #D0AC9E),
+      linear-gradient(to bottom, #BA9688, #E8C8B0),
+      /* cycle 4 */
+      linear-gradient(to bottom, #807E7C, #938F85),
+      linear-gradient(to bottom, #746E6C, #857D75),
+      linear-gradient(to bottom, #6A6462, #7A706A),
+      linear-gradient(to bottom, #666262, #746A68),
+      linear-gradient(to bottom, #606060, #6E6462),
+      linear-gradient(to bottom, #5C5858, #6A6260),
+      linear-gradient(to bottom, #585252, #72605A),
+      linear-gradient(to bottom, #5C5050, #8C6C66),
+      linear-gradient(to bottom, #6A5856, #A47E78),
+      linear-gradient(to bottom, #7E6462, #BC9288),
+      linear-gradient(to bottom, #9A7872, #D0AC9E),
+      linear-gradient(to bottom, #BA9688, #E8C8B0);
+    background-size: calc(100% / 48) 100%;
+    background-repeat: no-repeat;
+    background-position:
+      calc(0  * 100% / 47) 0%, calc(1  * 100% / 47) 0%,
+      calc(2  * 100% / 47) 0%, calc(3  * 100% / 47) 0%,
+      calc(4  * 100% / 47) 0%, calc(5  * 100% / 47) 0%,
+      calc(6  * 100% / 47) 0%, calc(7  * 100% / 47) 0%,
+      calc(8  * 100% / 47) 0%, calc(9  * 100% / 47) 0%,
+      calc(10 * 100% / 47) 0%, calc(11 * 100% / 47) 0%,
+      calc(12 * 100% / 47) 0%, calc(13 * 100% / 47) 0%,
+      calc(14 * 100% / 47) 0%, calc(15 * 100% / 47) 0%,
+      calc(16 * 100% / 47) 0%, calc(17 * 100% / 47) 0%,
+      calc(18 * 100% / 47) 0%, calc(19 * 100% / 47) 0%,
+      calc(20 * 100% / 47) 0%, calc(21 * 100% / 47) 0%,
+      calc(22 * 100% / 47) 0%, calc(23 * 100% / 47) 0%,
+      calc(24 * 100% / 47) 0%, calc(25 * 100% / 47) 0%,
+      calc(26 * 100% / 47) 0%, calc(27 * 100% / 47) 0%,
+      calc(28 * 100% / 47) 0%, calc(29 * 100% / 47) 0%,
+      calc(30 * 100% / 47) 0%, calc(31 * 100% / 47) 0%,
+      calc(32 * 100% / 47) 0%, calc(33 * 100% / 47) 0%,
+      calc(34 * 100% / 47) 0%, calc(35 * 100% / 47) 0%,
+      calc(36 * 100% / 47) 0%, calc(37 * 100% / 47) 0%,
+      calc(38 * 100% / 47) 0%, calc(39 * 100% / 47) 0%,
+      calc(40 * 100% / 47) 0%, calc(41 * 100% / 47) 0%,
+      calc(42 * 100% / 47) 0%, calc(43 * 100% / 47) 0%,
+      calc(44 * 100% / 47) 0%, calc(45 * 100% / 47) 0%,
+      calc(46 * 100% / 47) 0%, calc(47 * 100% / 47) 0%;
+    filter: blur(5px);
+  }
+</style>
+
+<section class="relative py-12 sm:py-18 overflow-hidden">
+  <!-- Blurred stripe background — extends past edges to prevent blur fade -->
+  <div class="absolute -z-10 hero-pride-bg" style="inset: -8%;"></div>
+  <!-- Subtle vignette overlay -->
+  <div class="absolute inset-0 -z-10" style="background: radial-gradient(ellipse at center, transparent 40%, rgba(30,20,18,0.22) 100%);"></div>
 
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 max-w-3xl mx-auto">
+    <div class="hidden sm:mb-8 sm:flex sm:justify-center">
+      <div class="relative rounded-full px-3 py-1 text-sm/6 text-stone-800 ring-1 ring-stone-800/15 hover:ring-stone-800/30 bg-white/40 backdrop-blur-sm">
+        Subscribe for State of the Art Design. <a href="#" class="font-semibold text-stone-900"><span aria-hidden="true" class="absolute inset-0"></span>100% Flexible to Pause or Cancel Anytime <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-stone-900 max-w-3xl mx-auto drop-shadow-sm">
       {headline}
     </h1>
-    <p class="mt-6 text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
+    <p class="mt-6 text-lg sm:text-xl text-stone-800/80 max-w-2xl mx-auto">
       {subheadline}
     </p>
     <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
       <a
         href={ctaPrimaryHref}
-        class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-brand-600 rounded-xl hover:bg-brand-700 transition-colors shadow-sm"
+        class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-stone-800 rounded-xl hover:bg-stone-900 transition-colors shadow-md"
       >
         {ctaPrimary}
       </a>
       {ctaSecondary && ctaSecondaryHref && (
         <a
           href={ctaSecondaryHref}
-          class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 text-base font-medium text-gray-700 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors"
+          class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 text-base font-medium text-stone-900 bg-white/50 border border-stone-900/20 rounded-xl hover:bg-white/70 backdrop-blur-sm transition-colors"
         >
           {ctaSecondary}
         </a>

@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: 'Narua',
-  tagline: 'Your tagline here',
+  tagline: 'Celebrating Vision With Artistic Experience',
   description: 'Narua helps you do something amazing.',
   url: 'https://narua.com',
   ogImage: '/og-image.png',

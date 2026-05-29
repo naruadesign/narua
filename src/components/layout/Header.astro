@@ -1,25 +1,20 @@
 ---
 import { siteConfig } from '../../content/config/site'
 import { navLinks } from '../../content/config/navigation'
-
-const currentPath = Astro.url.pathname
 ---
 
-<header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-100">
+<header class="sticky top-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur border-b border-gray-100 dark:border-gray-800">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
-      <a href="/" class="flex items-center gap-2 font-semibold text-gray-900 hover:text-brand-600 transition-colors">
-        <img src="/narua64x64.png" alt={siteConfig.name} class="w-8 h-8 rounded" />
-        {siteConfig.name}
+      <a href="/" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+        <img src="/narua-logo.svg" alt={siteConfig.name} class="h-10 w-auto" />
       </a>
 
       <nav class="hidden md:flex items-center gap-6">
         {navLinks.map(link => (
           <a
             href={link.href}
-            class={`text-sm font-medium transition-colors hover:text-brand-600 ${
-              currentPath === link.href ? 'text-brand-600' : 'text-gray-600'
-            }`}
+            class="nav-link text-sm font-medium text-gray-600 dark:text-gray-400 transition-colors hover:text-brand-600 dark:hover:text-brand-400"
           >
             {link.label}
           </a>
@@ -27,16 +22,31 @@ const currentPath = Astro.url.pathname
       </nav>
 
       <div class="flex items-center gap-3">
+        <button
+          id="theme-toggle"
+          class="p-2 rounded-md text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+          aria-label="Toggle dark mode"
+        >
+          <svg id="icon-sun" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <svg id="icon-moon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+
         <a
-          href="/contact"
+          href="https://www.google.com"
+          target="_blank"
+          rel="noopener noreferrer"
           class="hidden sm:inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-brand-600 rounded-lg hover:bg-brand-700 transition-colors"
         >
-          Get started
+          Login
         </a>
 
         <button
           id="menu-toggle"
-          class="md:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+          class="md:hidden p-2 rounded-md text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800"
           aria-label="Toggle menu"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -47,30 +57,81 @@ const currentPath = Astro.url.pathname
     </div>
   </div>
 
-  <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 bg-white">
+  <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900">
     <nav class="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-3">
       {navLinks.map(link => (
         <a
           href={link.href}
-          class={`text-sm font-medium transition-colors hover:text-brand-600 ${
-            currentPath === link.href ? 'text-brand-600' : 'text-gray-600'
-          }`}
+          class="mobile-nav-link text-sm font-medium text-gray-600 dark:text-gray-400 transition-colors hover:text-brand-600 dark:hover:text-brand-400"
         >
           {link.label}
         </a>
       ))}
       <a
-        href="/contact"
-        class="mt-2 inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-brand-600 rounded-lg hover:bg-brand-700 transition-colors"
+        href="https://www.google.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mobile-nav-link mt-2 inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-brand-600 rounded-lg hover:bg-brand-700 transition-colors"
       >
-        Get started
+        Login
       </a>
     </nav>
   </div>
 </header>
 
 <script>
-  const toggle = document.getElementById('menu-toggle')
-  const menu = document.getElementById('mobile-menu')
-  toggle?.addEventListener('click', () => menu?.classList.toggle('hidden'))
+  // Mobile menu toggle
+  const menuToggle = document.getElementById('menu-toggle')
+  const mobileMenu = document.getElementById('mobile-menu')
+  menuToggle?.addEventListener('click', () => mobileMenu?.classList.toggle('hidden'))
+
+  // Close mobile menu when an anchor link is clicked
+  document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', () => mobileMenu?.classList.add('hidden'))
+  })
+
+  // Dark mode toggle
+  const themeToggle = document.getElementById('theme-toggle')
+  const iconSun = document.getElementById('icon-sun')
+  const iconMoon = document.getElementById('icon-moon')
+  const html = document.documentElement
+
+  function updateIcons() {
+    if (html.classList.contains('dark')) {
+      iconSun?.classList.remove('hidden')
+      iconMoon?.classList.add('hidden')
+    } else {
+      iconSun?.classList.add('hidden')
+      iconMoon?.classList.remove('hidden')
+    }
+  }
+
+  updateIcons()
+
+  themeToggle?.addEventListener('click', () => {
+    html.classList.toggle('dark')
+    localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light')
+    updateIcons()
+  })
+
+  // Active section highlighting via IntersectionObserver (home page only)
+  const anchorLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-link[href^="/#"], .mobile-nav-link[href^="/#"]')
+  const sections = document.querySelectorAll<HTMLElement>('section[id]')
+
+  if (sections.length > 0) {
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            anchorLinks.forEach(link => {
+              link.classList.toggle('nav-active', link.getAttribute('href') === `/#${entry.target.id}`)
+            })
+          }
+        })
+      },
+      { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
+    )
+
+    sections.forEach(section => observer.observe(section))
+  }
 </script>
