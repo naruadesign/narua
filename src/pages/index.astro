@@ -1,18 +1,16 @@
 ---
-import { getEntry, render } from 'astro:content'
+import { getEntry } from 'astro:content'
 import BaseLayout from '../components/layout/BaseLayout.astro'
 import Hero from '../components/sections/Hero.astro'
 import Features from '../components/sections/Features.astro'
 import PricingTable from '../components/sections/PricingTable.astro'
 import ContactForm from '../components/sections/ContactForm.astro'
+import HowItWorks from '../components/sections/HowItWorks.astro'
 
 const home = await getEntry('pages', 'home')
-const about = await getEntry('pages', 'about')
 
 if (!home) throw new Error('Missing content: src/content/pages/home.mdx')
-if (!about) throw new Error('Missing content: src/content/pages/about.mdx')
 
-const { Content: AboutContent } = await render(about)
 const { hero, features } = home.data
 ---
 
@@ -29,16 +27,9 @@ const { hero, features } = home.data
   )}
 
   {features && <Features features={features} />}
+  <HowItWorks />
 
-  <section id="about" class="py-20 sm:py-28 bg-gray-50 dark:bg-gray-800/50">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="prose prose-gray prose-lg dark:prose-invert max-w-none">
-        <AboutContent />
-      </div>
-    </div>
-  </section>
-
-  <PricingTable />
+<PricingTable />
 
   <div>
     <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 text-center">

@@ -7,7 +7,14 @@
       "Bash(gh --version)",
       "Bash(git --version)",
       "Read(//Users/hawckins/.claude/**)",
-      "Read(//Users/hawckins/.claude/plans/**)"
+      "Read(//Users/hawckins/.claude/plans/**)",
+      "Bash(du -sh ~/Library/Caches/ms-playwright 2>/dev/null; ls ~/Library/Caches/ms-playwright 2>/dev/null)",
+      "Read(//Users/hawckins/Library/Caches/ms-playwright/**)",
+      "Bash(rm -rf ~/Library/Caches/ms-playwright && df -h / | tail -1)",
+      "Bash(pkill -f \"astro dev\")"
+    ],
+    "additionalDirectories": [
+      "/Users/hawckins/Library/Caches/ms-playwright"
     ]
   }
 }

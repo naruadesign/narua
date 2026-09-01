@@ -9,6 +9,7 @@ const pages = defineCollection({
     description: z.string().optional(),
     hero: z.object({
       headline: z.string(),
+      headlineAccent: z.string().optional(),
       subheadline: z.string(),
       ctaPrimary: z.string(),
       ctaPrimaryHref: z.string(),
